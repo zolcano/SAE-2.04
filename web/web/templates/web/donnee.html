@@ -1,0 +1,47 @@
+{% extends "web/template.html" %}
+{% block title %}donnee{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="get">
+            <div class="row">
+                <div>
+                    <input type="text" name="capteur_id" class="form-control" placeholder="ID ou Nom du Capteur">
+                </div>
+                <div>
+                    <input type="date" name="start_date" class="form-control" placeholder="Date de début">
+                </div>
+                <div>
+                    <input type="date" name="end_date" class="form-control" placeholder="Date de fin">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                </div>
+                <div method="get" action="">
+                    <button type="submit" class="btn btn-primary" name="export_csv">Export CSV</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MAC</th>
+                    <th>Heure</th>
+                    <th>Temp (°C)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donnee in Donnees %}
+                <tr>
+                    <td>{{ donnee.Id }}</td>
+                    <td>{{ donnee.CapteurID }}</td>
+                    <td>{{ donnee.Timestamp }}</td>
+                    <td>{{ donnee.Valeur }} °C</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

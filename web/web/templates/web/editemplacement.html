@@ -1,0 +1,11 @@
+{% extends "web/template.html" %}
+{% block title %}Édition{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'traitementemplacement' Capteur.Id %}">
+        {% csrf_token %}
+        <label for="id_Emplacement">Nom :</label>
+        <input type="text" id="id_Emplacement" name="Emplacement" value="{{ form.Emplacement.value }}">
+        <input type="submit" value="Valider"/>
+    </form>
+{% endblock %}
