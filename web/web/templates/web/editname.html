@@ -1,0 +1,25 @@
+{% extends "web/template.html" %}
+{% block title %}Édition{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'traitementname' Capteur.Id %}">
+        {% csrf_token %}
+        <ul>
+        {% for field in form %}
+            <li>
+                {{ field.label_tag }}
+                {% if field.name == 'Nom' %}
+                    {{ field }}
+                {% else %}
+                    {% if field.field.widget.input_type != 'hidden' %}
+                        <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" value="{{ field.value|default_if_none:'' }}" readonly>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+        <input type="submit" value="Valider"/>
+    </form>
+{% endblock %}

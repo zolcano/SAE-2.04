@@ -1,0 +1,32 @@
+body{
+    min-height: 100vh;
+}
+
+.nav-link {
+    transition: all 0.2s;
+    color: rgb(255, 255, 255);
+    margin-inline: 20px;
+}
+
+.nav-link:hover {
+    background-color: rgb(238, 238, 238);
+    border-radius: 8px;
+    color: rgb(255, 255, 255);
+}
+
+.navbar {
+    padding-inline: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.nav-link-b {
+    color: rgb(255, 255, 255);
+    background-color: rgb(238, 238, 238);
+    border-radius: 8px;
+}
+
+.navbar-brand {
+    padding-right: 25px;
+    border-right: 1px solid rgba(0, 0, 0, 0.178);
+}
