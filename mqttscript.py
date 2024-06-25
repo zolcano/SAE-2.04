@@ -52,10 +52,16 @@ def insert_data1(host, database, user, password, table, data):
         
         if connection.is_connected():
             cursor = connection.cursor()
-            query = f"INSERT INTO {table} (CapteurId, Timestamp, Valeur) VALUES (%s, %s, %s)"
+            query = f"""
+            INSERT INTO {table} (CapteurId, Timestamp, Valeur) 
+            VALUES (%s, %s, %s) 
+            ON DUPLICATE KEY UPDATE 
+                Timestamp = VALUES(Timestamp),
+                Valeur = VALUES(Valeur)
+            """
             cursor.execute(query, data)
             connection.commit()
-            print(f"Data inserted successfully into {table} table")
+            print(f"Data inserted or updated successfully into {table} table")
     except Error as e:
         print("Error while connecting to MySQL", e)
     finally:
@@ -65,6 +71,7 @@ def insert_data1(host, database, user, password, table, data):
             print("MySQL connection is closed")
 
 def insert_data2(host, database, user, password, table, data):
+    connection = None
     try:
         connection = mysql.connector.connect(
             host=host,
@@ -75,10 +82,16 @@ def insert_data2(host, database, user, password, table, data):
         
         if connection.is_connected():
             cursor = connection.cursor()
-            query = f"INSERT INTO {table} (Nom, Piece, Emplacement, Date) VALUES (%s, %s, %s, %s)"
+            query = f"""
+            INSERT INTO {table} (Nom, Piece, Emplacement, Date) 
+            VALUES (%s, %s, %s, %s) 
+            ON DUPLICATE KEY UPDATE 
+                Date = VALUES(Date),
+                Piece = VALUES(Piece)
+            """
             cursor.execute(query, data)
             connection.commit()
-            print(f"Data inserted successfully into {table} table")
+            print(f"Data inserted or updated successfully into {table} table")
     except Error as e:
         print("Error while connecting to MySQL", e)
     finally:
